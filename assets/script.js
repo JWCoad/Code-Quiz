@@ -17,55 +17,44 @@ var play = true;
 
 var questionBank = [
   {
-    question: "What is HTML short for?",
-    options: [
-      "Hyper Text MarkDown Language  ",
-      "Happy Text Markup Language",
-      "Hyper Text Markup Language",
-      "Header Test Markup Language",
-    ],
-    answer: "Hyper Text Markup Language",
+    question: "Inside which HTML element do we put the JavaScript?",
+    options: ["<scripting> ", "<js>", "<javascript>", "<script>"],
+    answer: "<script>",
   },
   {
-    question: "What does the this Keyword do? ",
+    question: "Where is the correct place to insert a JavaScript? ",
     options: [
-      "This is a reference variable that refers to the current object",
-      "This is a reference variable that refers to the current variable",
-      "This is a reference object that refers to the current object",
-      "This is a reference object that refers to the current variable",
+      "Both the <head> section and the <body> section are correct ",
+      "The <body> section",
+      "The <head> section",
+      "Assets folder",
     ],
-    answer: "This is a reference variable that refers to the current object",
+    answer: "Both the <head> section and the <body> section are correct",
   },
   {
-    question:
-      "Whats is the diference between == and === comparison operators in Java Script ",
+    question: "How do you write `Hello World` in an alert box?",
     options: [
-      "One is a typo",
-      "=== compares type and value == is just value",
-      " == compares type and value === is just value",
-      " more === more fun",
+      "alert(`Hello World`);",
+      "msgBox(`Hello World`);",
+      "msg(`Hello World`);",
+      "alertBox(`Hello World`);",
     ],
-    answer: "=== compares type and value == is just value",
+    answer: "alert(`Hello World`);",
   },
   {
-    question: "What is jQuery?",
+    question: "How do you create a function in JavaScript?",
     options: [
-      "jQuery is a lightweight, write less, do more, JavaScript library",
-      "jQuery is a Query on the j element ",
-      " jQuery is a Function to run JavaScript ",
-      " jQuery is a Class selector to select elemenets in css",
+      "function myFunction()",
+      "function:myFunction()",
+      "function = myFunction() ",
+      "Ask Nicely",
     ],
-    answer: "jQuery is a lightweight, write less, do more, JavaScript library",
+    answer: "function myFunction()",
   },
   {
-    question: "what is git used for?",
-    options: [
-      "Git is a CheatSheet used for learing JavaScript",
-      "Git is Slang telling somone somthing",
-      "Git used for Version control",
-      " Git is a resource for attatching documents to html",
-    ],
-    answer: "Git used for Version control",
+    question: "How to write an IF statement in JavaScript?",
+    options: ["if i = 5", "if i == 5 then", "if i = 5 thenl", "if (i == 5)  "],
+    answer: "if (i == 5)  ",
   },
   {
     question: "When would i use a Wireframe",
@@ -78,9 +67,9 @@ var questionBank = [
     answer: "When planning basic structure a web page",
   },
   {
-    question: "Choose the correct syntax",
-    options: ["var = x  0;", "var x = 0", "var 1 = 0;", "var x = 0;"],
-    answer: "var x = 0;",
+    question: "How do you find the number with the highest value of x and y?",
+    options: ["top(x, y)", "ceil(x, y)", "Math.max(x, y)  ", "Math.ceil(x, y)"],
+    answer: "Math.max(x, y) ",
   },
 ];
 

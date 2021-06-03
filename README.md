@@ -11,3 +11,5 @@
 ## Resources used:
 
 ### [Stack Overflow](https://stackoverflow.com/)
+
+### [Questions sourced from](https://www.w3schools.com/quiztest/quiztest.asp?qtest=JS)

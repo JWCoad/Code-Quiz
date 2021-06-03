@@ -1,11 +1,18 @@
 // Pull in all the elements
 
-var timeleft = document.queryselector("#timeleft");
-var questionText = document.queryselector("#questionActual");
-var playButton = document.queryselector("playButton");
-var answerButtons = document.queryselector("#answerButton");
-var timeleftStart = 60;
+var timeleft = document.querySelector("#timeleft");
 
+var questionText = document.querySelector("#questionArea");
+
+var guessArea = document.querySelector("#answerArea");
+
+var playButton = document.querySelector("#playButton");
+
+var indexNum = 0;
+var timeleftStart = 60;
+var correct = 0;
+var wrong = 0;
+var play = true;
 //Question bank
 
 var questionBank = [
@@ -77,33 +84,51 @@ var questionBank = [
   },
 ];
 
-// Attach start button function to the start button and init all needed functions
+// starts quiz, clears text area, and timer
+const startQuiz = function () {
+  remainingTime();
+  questionText.setAttribute("style", "text-align: left;");
+  guessArea.setAttribute("style", "margin-left: 25px; width: fit-content;");
+  playButton.remove();
 
-function startgame() {
-  timeleftStart();
   questionStart();
-}
+};
+
+// timeleft start and end game, game over man
+var remainingTime = function () {
+  var timeInterval = setInterval(function () {
+    if (timeleftStart > 0 && play === true) {
+      timeleft.innerText = timeleftStart;
+      timeleftStart--;
+    } else {
+      timeleft.innerText = timeleftStart;
+      timeleft.setAttribute("style", "color: red;");
+      clearInterval(timeInterval);
+      gameOver();
+    }
+  }, 1000);
+};
 
 function questionStart() {
-  // if the indexNum is greater than length of the questionsArr, end quiz
+  // ends quiz when questions empty
   if (indexNum === questionBank.length) {
     play = false;
   } else {
-    // set variables from object in questionsArr index
+    // set variables from object in question bank
     var question = questionBank[indexNum].question;
     var options = questionBank[indexNum].options;
     answer = questionBank[indexNum].answer;
     // change h1 to the question
-    questionEl.textContent = question;
+    questionText.textContent = question;
     // remove div contents
-    questionText.textContent = "";
+    guessArea.textContent = "";
     // for each of the 4 options, create a button and append it to the now empty div
     for (var i = 0; i < options.length; i++) {
       var btnEl = document.createElement("button");
       btnEl.className = "btn guess-list";
       btnEl.setAttribute("btn-id", [i + 1]);
       btnEl.textContent = `${[i + 1]}. ${options[i]}`;
-      messageEl.appendChild(btnEl);
+      guessArea.appendChild(btnEl);
     }
     // increment indexNum to use in next run through
     indexNum++;
@@ -111,64 +136,42 @@ function questionStart() {
 }
 
 // answer saver
-var answerCheck = function (event) {
+var answerSave = function (event) {
   var guess1 = event.target;
   if (guess1.matches(".guess-list")) {
     var guessActual = guess1.getAttribute("btn-id");
-    guessCompare(guessActual);
+    answerCheck(guessActual);
   }
 };
 
-// function to compare the guess to the actual answer
-var guessCompare = function (guessId) {
-  // if guessed correct
-  if (guessId === answer) {
-    // add to timer, increase correct var, display correct, run next question
-    timer += 3;
+// check answer
+var answerCheck = function (guessActual) {
+  if (guessActual === answer) {
+    timeleftStart += 3;
     correct++;
-    resultEl.innerText = "Correct!";
-    runQuiz();
-    // if guessed incorrect
+    questionStart();
   } else {
     // subtract from timer, increase wrong var, display wrong, run next question
-    timer -= 10;
+    timeleftStart -= 10;
     wrong++;
-    resultEl.innerText = "Wrong!";
-    runQuiz();
+    questionStart();
   }
 };
 
-// function to endQuiz when all questions answered or timer runs out
-var endQuiz = function () {
+// function to gameOver when all questions answered or timer runs out
+var gameOver = function () {
   // ensure score can't be negative
-  if (timer < 0) {
-    timer = 0;
-    timerEl.innerText = timer;
+  if (timeleftStart < 0) {
+    timeleftStart = 0;
+    timeleft.innerText = timeleftStart;
   }
   // update DOM
-  questionEl.removeAttribute("style");
-  questionEl.textContent = "Let's see how you did!";
-  messageEl.innerHTML = `<div>You got ${correct} questions correct and ${wrong} questions wrong.</div><div>Your time score is: ${timer}.</div>`;
-  // create and append a form elements for submitting initials
-  var formEl = document.createElement("form");
-  formEl.setAttribute("id", "initials-form");
-  var inputEl = document.createElement("input");
-  inputEl.setAttribute("type", "text");
-  inputEl.setAttribute("name", "user-initials");
-  inputEl.className = "user-initials";
-  inputEl.setAttribute("placeholder", "Enter Your Initials");
-  formEl.appendChild(inputEl);
-  var submitEl = document.createElement("button");
-  submitEl.className = "btn";
-  submitEl.setAttribute("id", "save-initials");
-  submitEl.setAttribute("type", "submit");
-  submitEl.textContent = "Submit";
-  formEl.appendChild(submitEl);
-  // append the entire form to the messageEl
-  messageEl.appendChild(formEl);
+  questionText.removeAttribute("style");
+  questionText.textContent = "Your score was";
+  guessArea.innerHTML = `<div>You got ${correct} questions correct and ${wrong} questions wrong.</div> <div>Your time score is: ${timeleftStart}.</div>`;
 };
 
 // event listener for click of start button
-startBtn.addEventListener("click", startQuiz);
+playButton.addEventListener("click", startQuiz);
 // event listener for click of a guess button during quiz
-messageEl.addEventListener("click", guessHandler);
+guessArea.addEventListener("click", answerSave);

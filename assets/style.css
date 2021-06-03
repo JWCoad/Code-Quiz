@@ -1,25 +1,8 @@
-/* * { border: 1px solid black; } */
-:root {
-  --pColor: indigo;
-}
-
 header {
   display: flex;
   justify-content: space-between;
   background-color: white;
   padding: 0px 0px 50px 0px;
-}
-
-.highScore {
-  text-align: center;
-  margin: 0;
-  padding: 14px 25px;
-  font-size: 20px;
-  text-decoration: none;
-}
-.highScore:hover {
-  font-weight: bolder;
-  text-decoration: underline;
 }
 
 .timeLeft {
@@ -34,16 +17,6 @@ body div {
   flex-direction: column;
 }
 
-.navButton {
-  background-color: lightblue;
-  color: red;
-  color: rgb(255, 255, 255);
-  border: 2px solid black;
-  font-size: 20px;
-  margin: 4px 30%;
-  width: auto;
-  border-radius: 4px;
-}
 .playButton {
   background-color: lightblue;
   color: rgb(255, 255, 255);
@@ -55,34 +28,4 @@ body div {
 }
 .btn:hover {
   opacity: 0.8;
-}
-
-#questionsText {
-  font-size: 30px;
-  margin: 0 auto;
-  text-align: center;
-  padding: 25px;
-}
-
-#answerButtons {
-  align-items: flex-start;
-}
-.answerOutcome {
-  margin: 0px 30%;
-  padding: 10px;
-  border-top: 2px solid gray;
-}
-.hideButton {
-  display: none;
-}
-
-.formInput {
-  text-align: center;
-  margin: 0 auto;
-}
-
-.scoresCurrent {
-  margin: 0 400px;
-  padding: 5px 0;
-  text-align: start;
 }
